@@ -1,0 +1,388 @@
+/* ==========================================
+   CONFIGURAÇÕES BASE E RESET
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.btn-ini {
+    display: inline-block;
+    background-color: #1db954; /* Verde do Spotify */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-ini:hover {
+    transform: scale(1.04);
+    background-color: #1ed760; /* Verde um pouco mais claro ao passar o mouse */
+}
+
+body {
+    background-color: #000000;
+    font-family: 'Circular', 'Segoe UI', Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+/* Container Principal (Simulador de Celular) */
+.wrapped-container {
+    background-color: #121212;
+    width: 100vw;
+    height: 100vh;
+    max-width: 420px;
+    max-height: 850px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barras de Progresso dos Stories */
+.barra-progresso-container {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    padding: 0 15px;
+    gap: 5px;
+    z-index: 10;
+}
+
+.barra {
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.2);
+    flex: 1;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.preenchimento {
+    height: 100%;
+    width: 0%;
+    background-color: #ffffff;
+    transition: width 0.2s linear;
+}
+
+/* Estrutura de Exibição dos Stories */
+.story {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 50px 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.story.ativo {
+    display: flex;
+    animation: entrarStory 0.4s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes entrarStory {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.conteudo-story {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Elementos de Texto Gerais */
+.tag-topo {
+    color: #1db954;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+}
+
+.titulo-capa {
+    font-size: 2rem;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.disco-girando {
+    font-size: 4.5rem;
+    animation: rodarDisco 6s linear infinite;
+    margin-bottom: 40px;
+}
+
+@keyframes rodarDisco {
+    to { transform: rotate(360deg); }
+}
+
+.subtitulo-wrapped {
+    font-size: 1.3rem;
+    color: #ffffff;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Foto Central do Casal (Story 2) */
+.moldura-foto {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 22px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+    border: 3px solid #ffffff;
+}
+
+.moldura-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nome-artista {
+    font-size: 1.6rem;
+    color: #ff758f;
+    font-weight: 700;
+}
+
+.texto-secundario {
+    color: #a59ea0;
+    font-size: 0.92rem;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* Lista de Gêneros (Story 3) */
+.lista-generos {
+    list-style: none;
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+}
+
+.lista-generos li {
+    font-size: 1.15rem;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.rank {
+    background-color: #1db954;
+    color: #000000;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   TABULEIRO DO JOGO (Reduzido para 8 Fotos)
+   ========================================== */
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 340px;
+    margin: 15px auto;
+    perspective: 1000px;
+}
+
+.memory-card {
+    aspect-ratio: 1 / 1; 
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+}
+
+.memory-card.virada {
+    transform: rotateY(180deg);
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-front {
+    background-color: #282828;
+    border: 2px solid #1db954;
+    color: #1db954;
+    font-size: 1.4rem;
+}
+
+.card-back {
+    background-color: #121212;
+    border: 2px solid #ffffff;
+    transform: rotateY(180deg);
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* Vitória e Contadores Finais */
+.vitoria-container {
+    width: 100%;
+    animation: entrarStory 0.5s ease;
+}
+
+.tempo-container {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.tempo-box {
+    background: #1e1b1c;
+    border: 1px solid #2e292b;
+    padding: 22px 15px;
+    border-radius: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.tempo-box strong {
+    font-size: 2.3rem;
+    color: #ffffff;
+    display: block;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.tempo-box span {
+    font-size: 0.8rem;
+    color: #a59ea0;
+    text-transform: uppercase;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.card-mensagem {
+    background: #1e1b1c;
+    border-left: 4px solid #ff4d6d;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-mensagem p {
+    color: #ffffff;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    font-style: italic;
+}
+
+/* Botões de Ação Final */
+.botoes-finais {
+    margin-top: 25px;
+    width: 100%;
+}
+
+.btn-wrapped {
+    display: block;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(255, 255, 255, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.btn-wrapped:hover {
+    transform: scale(1.03);
+}
+
+/* Instruções e Partículas Flutuantes */
+.instrucao {
+    font-size: 0.8rem;
+    color: #555555;
+    position: absolute;
+    bottom: 30px;
+}
+
+.tulipa-particula {
+    position: absolute; /* Essencial para flutuar de forma independente */
+    pointer-events: none;
+    user-select: none;
+    z-index: 99999;
+    animation: voarParaCima 2.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes voarParaCima {
+    0% { 
+        transform: translateY(0) translateX(0) rotate(0deg); 
+        opacity: 0; 
+    }
+    10% {
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-120vh) translateX(var(--trajetoria-x)) rotate(450deg); 
+        opacity: 0; 
+    }
+}
