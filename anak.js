@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     let storyAtual = 1;
-    const totalStories = 5; // Atualizado para 5 stories
+    const totalStories = 6; // Atualizado para 5 stories
     let musicaIniciada = false;
     let jogoConcluido = false;
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             // Se estiver no último story (jogo - Story 5) e o jogo não acabou, trava o clique na tela
-            if (storyAtual === 5 && !jogoConcluido) {
+            if (storyAtual === 6 && !jogoConcluido) {
                 return; 
             }
             
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (novoStory) novoStory.classList.add('ativo');
 
             // Inicia o jogo automaticamente no story 5
-            if (storyAtual === 5 && !jogoConcluido) {
+            if (storyAtual === 6 && !jogoConcluido) {
                 iniciarJogo();
             }
         } else {
