@@ -386,3 +386,11 @@ body {
         opacity: 0; 
     }
 }
+
+/* Impede a seleção de texto e o menu de contexto ao clicar nas cartas */
+.memory-game, .memory-card {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    -webkit-tap-highlight-color: transparent; /* Remove aquele brilho azul de clique no Android */
+}
